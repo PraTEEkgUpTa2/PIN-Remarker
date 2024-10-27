@@ -77,15 +77,15 @@ export default function Map({ onPinDrop, selectedPin, pins }) {
   }, [selectedPin]);
 
   const navigateToLocation = () => {
-    if (selectedPin && mapRef.current) {
-      mapRef.current.setView([selectedPin.lat, selectedPin.lng], 13);
-    } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        mapRef.current.setView([latitude, longitude], 13);
-      });
-    }
-  };
+  if (selectedPin && mapRef.current) {
+    mapRef.current.setView([selectedPin.lat, selectedPin.lng], 13);
+  } else if (typeof window !== "undefined" && navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      mapRef.current.setView([latitude, longitude], 13);
+    });
+  }
+};
 
   return (
     <div className="relative w-full h-full">
