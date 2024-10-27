@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Map from "./component/Map";
+import dynamic from 'next/dynamic';
+const Map = dynamic(() => import('./component/Map'), { ssr:false});
 import Sidebar from "./component/Sidebar";
 
 export default function Home() {
