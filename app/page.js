@@ -9,12 +9,16 @@ export default function Home() {
   const [selectedPin, setSelectedPin] = useState(null);
 
   useEffect(() => {
+    if(typeof window !== "undefined"){
     const savedPins = JSON.parse(localStorage.getItem("pins")) || [];
     setPins(savedPins);
+    }
   }, []);
 
   useEffect(() => {
+    if(typeof window !== "undefined"){
     localStorage.setItem("pins", JSON.stringify(pins));
+    }
   }, [pins]);
 
   const handlePinDrop = (pin) => {
