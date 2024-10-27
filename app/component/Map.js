@@ -76,27 +76,11 @@ export default function Map({ onPinDrop, selectedPin, pins }) {
     }
   }, [selectedPin]);
 
-  const navigateToLocation = () => {
-  if (selectedPin && mapRef.current) {
-    mapRef.current.setView([selectedPin.lat, selectedPin.lng], 13);
-  } else if (typeof window !== "undefined" && navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      mapRef.current.setView([latitude, longitude], 13);
-    });
-  }
-};
+ 
 
   return (
     <div className="relative w-full h-full">
       <div id="map" className="w-full h-full" />
-      <button
-        onClick={navigateToLocation}
-        className="absolute bottom-5 right-5 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition"
-        title="Navigate to location"
-      >
-        <Compass className="w-6 h-6 text-red-700" />
-      </button>
     </div>
   );
 }
